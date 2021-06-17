@@ -36,7 +36,7 @@
       <link href="./Signin Template · Bootstrap v5.0_files/signin.css" rel="stylesheet">
 </head>
 
-<body class="text-center container p-5"style="background-image: url('AB.jpg');"> 
+<body class="text-center container p-5"style="background-image: url('A.jpg');"> 
 
     <main class="form-signin container p-5">
       <form>
@@ -44,26 +44,26 @@
         <h1 class="h3 mb-3 fw-normal">Zaloguj się</h1>
     
         <div class="form-floating">
-          <input type="email" class="form-control" id="login" placeholder="Nazwa użytkownika">
+          <input type="text" class="form-control" id="login" placeholder="Nazwa użytkownika">
           <label for="floatingInput">Nazwa Użytkownika</label>
         </div>
         <div class="form-floating">
           <input type="password" class="form-control" id="pass" placeholder="Hasło">
           <label for="floatingPassword">Hasło</label>
         </div>
-        <button class="w-100 btn btn-lg btn-primary" type="submit" onclick="kot();">Zaloguj się</button>
+        <button class="w-100 btn btn-lg btn-primary" type="submit" onclick="logi();">Zaloguj się</button>
        
     </form>
       
 </body>
 <script> 
-function kot()
+function logi()
 {
   var login = document.getElementById("login").value;
   var pass = document.getElementById("pass").value;
   if(login=="admin"&& pass=="lubieplacki")
   {
-    window.open('index.php', '_blank');
+    window.open('sta.php', '_blank');
   }
   else{
   alert("Prosze wpisać poprawne dane");  

@@ -65,7 +65,7 @@ require_once('db.php');
         </div>
         <div class="col-4 d-flex justify-content-end align-items-center">
           </a>
-          <a class="btn btn-sm btn-outline-secondary" style="background-color: white;" href="login.php">Zaloguj się</a>
+          <a class="btn btn-sm btn-outline-secondary" style="background-color: white;" href="Spotkania.php">Wyloguj się</a>
         </div>
       </div>
     </header>
@@ -73,26 +73,24 @@ require_once('db.php');
     <div class="nav-scroller py-1 mb-2 ">
       <nav style="background-color:rgb(59, 57, 57);"
       class="nav d-flex justify-content-between back">
-        <a style="color: honeydew;" class="p-1 link-secondary" href="index.php">Strona główna</a>
-        <a style="color: honeydew;" class="p-1 link-secondary" href="Spotkania.php">Spotkania</a>
-        <a style="color: honeydew;" class="p-1 link-secondary" href="druzyny.php">Drużyny</a>
-        <a style="color: honeydew;" class="p-1 link-secondary" href="pilkarze.php">Piłkarze</a>
-        <a style="color: honeydew;" class="p-1 link-secondary" href="trenerzy.php">Trenerzy</a>
-        <a style="color: honeydew;" class="p-1 link-secondary" href="sedziowie.php">Sędziowie</a>
-        <a style="color: honeydew;" class="p-1 link-secondary" href="stadion.php">Stadiony</a>
+        <a style="color: honeydew;" class="p-1 link-secondary" href="Spo.php">Spotkania</a>
+        <a style="color: honeydew;" class="p-1 link-secondary" href="dru.php">Drużyny</a>
+        <a style="color: honeydew;" class="p-1 link-secondary" href="pil.php">Piłkarze</a>
+        <a style="color: honeydew;" class="p-1 link-secondary" href="tre.php">Trenerzy</a>
+        <a style="color: honeydew;" class="p-1 link-secondary" href="sed.php">Sędziowie</a>
+        <a style="color: honeydew;" class="p-1 link-secondary" href="Sta.php">Stadiony</a>
      </p>
       </nav>
     </div>
   </div>
   
-    
-      <div class="container">   
-      <?php	
+  <div class="container p-5">
+ <?php	
  $search_keyword = '';
  if(!empty($_POST['search']['keyword'])) {
    $search_keyword = $_POST['search']['keyword'];
  }
- $sql = 'SELECT * FROM pilkarze WHERE Druzyny LIKE :keyword OR Imie LIKE :keyword OR Nazwisko LIKE :keyword OR Wiek LIKE :keyword OR Pozycja LIKE :keyword ORDER BY ID DESC ';
+ $sql = 'SELECT * FROM sedziowie WHERE Imie LIKE :keyword OR Nazwisko LIKE :keyword OR Wiek LIKE :keyword ORDER BY ID DESC ';
  
  /* Pagination Code starts */
  $per_page_html = '';
@@ -134,11 +132,10 @@ require_once('db.php');
 <table class='tbl-qa'>
  <thead>
  <tr>
-   <th class='table-header' >Drużyny</th>
    <th class='table-header' >Imie</th>
    <th class='table-header' >Nazwisko</th>
    <th class='table-header' >Wiek</th>
-   <th class='table-header' >Pozycja</th>
+
    
 
  </tr>
@@ -149,11 +146,10 @@ require_once('db.php');
    foreach($result as $row) {
  ?>
    <tr class='table-row'>
-   <td><?php echo $row['Druzyny']; ?></td>
    <td><?php echo $row['Imie']; ?></td>
    <td><?php echo $row['Nazwisko']; ?></td>
    <td><?php echo $row['Wiek']; ?></td>
-   <td><?php echo $row['Pozycja']; ?></td>
+   <td><a style="text-align: left;" href="deletesed.php?id=<?php echo $row['ID']; ?>">Usuń</a></td>
 
 
    </tr>
@@ -165,10 +161,30 @@ require_once('db.php');
 </table>
 <?php echo $per_page_html; ?>
 <div class="pt-5">
-</form>
+</form> 
+        <form class="form-floating" action="sedins.php" method="POST">
+         
+          <input type="text" class="form-control" name="Imie" placeholder="Imie">
+     
+          <input type="text" class="form-control" name="Nazwisko" placeholder="Nazwisko">
+
+          <input type="text" class="form-control" name="Wiek" placeholder="Wiek">
+
+          <input type="submit" name="submit" value="Dodaj">
+
+        </form>
+
 </body>
 
 </html>
+
+
+
+
+
+
+
+
 
 
 

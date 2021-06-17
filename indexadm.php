@@ -24,14 +24,9 @@ require_once('db.php');
     <meta name="Autor" content="Kamil Karmazyn">
     <title>NASZA PIŁKA</title>
     
-    <link rel="canonical" href="https://getbootstrap.com/docs/5.0/examples/blog/">
 
-    
 
-    <!-- Bootstrap core CSS -->
-   <link href="./Blog Template · Bootstrap v5.0_files/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
 
-    <!-- Favicons -->
 <meta name="theme-color" content="#7952b3">
     <style>
       .bd-placeholder-img {
@@ -49,11 +44,6 @@ require_once('db.php');
       }
     </style>
 
-    
-    <!-- Custom styles for this template -->
-    <link href="./Blog Template · Bootstrap v5.0_files/css" rel="stylesheet">
-    <!-- Custom styles for this template -->
-    <link href="./Blog Template · Bootstrap v5.0_files/blog.css" rel="stylesheet">
 <body style="background-image: url('a.jpg');">
   <div class="container">
     <header class="blog-header py-3">
@@ -65,7 +55,7 @@ require_once('db.php');
         </div>
         <div class="col-4 d-flex justify-content-end align-items-center">
           </a>
-          <a class="btn btn-sm btn-outline-secondary" style="background-color: white;" href="login.php">Zaloguj się</a>
+          <a class="btn btn-sm btn-outline-secondary" style="background-color: white;" href="Spotkania.php">Wyloguj się</a>
         </div>
       </div>
     </header>
@@ -73,26 +63,26 @@ require_once('db.php');
     <div class="nav-scroller py-1 mb-2 ">
       <nav style="background-color:rgb(59, 57, 57);"
       class="nav d-flex justify-content-between back">
-        <a style="color: honeydew;" class="p-1 link-secondary" href="index.php">Strona główna</a>
-        <a style="color: honeydew;" class="p-1 link-secondary" href="Spotkania.php">Spotkania</a>
-        <a style="color: honeydew;" class="p-1 link-secondary" href="druzyny.php">Drużyny</a>
-        <a style="color: honeydew;" class="p-1 link-secondary" href="pilkarze.php">Piłkarze</a>
-        <a style="color: honeydew;" class="p-1 link-secondary" href="trenerzy.php">Trenerzy</a>
-        <a style="color: honeydew;" class="p-1 link-secondary" href="sedziowie.php">Sędziowie</a>
-        <a style="color: honeydew;" class="p-1 link-secondary" href="stadion.php">Stadiony</a>
+        <a style="color: honeydew;" class="p-1 link-secondary" href="Spo.php">Spotkania</a>
+        <a style="color: honeydew;" class="p-1 link-secondary" href="dru.php">Drużyny</a>
+        <a style="color: honeydew;" class="p-1 link-secondary" href="pil.php">Piłkarze</a>
+        <a style="color: honeydew;" class="p-1 link-secondary" href="tre.php">Trenerzy</a>
+        <a style="color: honeydew;" class="p-1 link-secondary" href="sed.php">Sędziowie</a>
+        <a style="color: honeydew;" class="p-1 link-secondary" href="Sta.php">Stadiony</a>
      </p>
       </nav>
     </div>
   </div>
   
-    
-      <div class="container">   
-      <?php	
+  <main class="container p-3">
+
+
+  <?php	
  $search_keyword = '';
  if(!empty($_POST['search']['keyword'])) {
    $search_keyword = $_POST['search']['keyword'];
  }
- $sql = 'SELECT * FROM pilkarze WHERE Druzyny LIKE :keyword OR Imie LIKE :keyword OR Nazwisko LIKE :keyword OR Wiek LIKE :keyword OR Pozycja LIKE :keyword ORDER BY ID DESC ';
+ $sql = 'SELECT * FROM artykuly WHERE Nazwa LIKE :keyword OR Tag LIKE :keyword OR Tresc LIKE :keyword OR Datka LIKE :keyword ORDER BY ID DESC ';
  
  /* Pagination Code starts */
  $per_page_html = '';
@@ -134,11 +124,11 @@ require_once('db.php');
 <table class='tbl-qa'>
  <thead>
  <tr>
-   <th class='table-header' >Drużyny</th>
-   <th class='table-header' >Imie</th>
-   <th class='table-header' >Nazwisko</th>
-   <th class='table-header' >Wiek</th>
-   <th class='table-header' >Pozycja</th>
+   <th class='table-header' >Nazwa</th>
+   <th class='table-header' >Tag</th>
+   <th class='table-header' >Treść</th>
+   <th class='table-header' >Data</th>
+  
    
 
  </tr>
@@ -149,11 +139,12 @@ require_once('db.php');
    foreach($result as $row) {
  ?>
    <tr class='table-row'>
-   <td><?php echo $row['Druzyny']; ?></td>
-   <td><?php echo $row['Imie']; ?></td>
-   <td><?php echo $row['Nazwisko']; ?></td>
-   <td><?php echo $row['Wiek']; ?></td>
-   <td><?php echo $row['Pozycja']; ?></td>
+   <td><?php echo $row['Nazwa']; ?></td>
+   <td><?php echo $row['Tag']; ?></td>
+   <td><?php echo $row['Tresc']; ?></td>
+   <td><?php echo $row['Datka']; ?></td>
+
+   <td><a style="text-align: left;" href="deleteart.php?id=<?php echo $row['ID']; ?>">Usuń</a></td>
 
 
    </tr>
@@ -166,14 +157,23 @@ require_once('db.php');
 <?php echo $per_page_html; ?>
 <div class="pt-5">
 </form>
+
+<form class="form-floating" action="artins.php" method="POST">
+
+<input type="text" class="form-control" name="Nazwa" placeholder="Nazwa">
+
+<input type="text" class="form-control" name="Tag" placeholder="Tag">
+
+<input type="text" class="form-control" name="Tresc" placeholder="Tresc">
+
+<input type="text" class="form-control" name="Datka" placeholder="Datka">
+
+<input type="submit" name="submit" value="Dodaj">
+</form> 
+</div>
+</div>
+</main>
+       
 </body>
 
 </html>
-
-
-
-
-
-
-
-
